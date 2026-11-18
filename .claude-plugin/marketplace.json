@@ -11,6 +11,12 @@
       "description": "A skill that installs or updates the session-cost mod from the kKEo/claude-code-plugins-incubator marketplace, adding the marketplace first when it is missing",
       "source": "./plugins/session-cost-installer",
       "category": "Development"
+    },
+    {
+      "name": "plan-progress-installer",
+      "description": "A skill that installs or updates the plan-progress mod from the kKEo/claude-code-plugins-incubator marketplace, adding the marketplace first when it is missing",
+      "source": "./plugins/plan-progress-installer",
+      "category": "Development"
     }
   ]
 }
