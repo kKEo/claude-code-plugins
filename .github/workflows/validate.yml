@@ -1,0 +1,29 @@
+name: Validate Marketplace
+
+on:
+  pull_request:
+    paths:
+      - '.claude-plugin/**'
+      - 'plugins/**'
+      - 'scripts/check-marketplace'
+      - '.github/workflows/validate.yml'
+  push:
+    branches:
+      - master
+    paths:
+      - '.claude-plugin/**'
+      - 'plugins/**'
+      - 'scripts/check-marketplace'
+      - '.github/workflows/validate.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the marketplace manifest and plugin folders
+        run: scripts/check-marketplace

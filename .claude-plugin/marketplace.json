@@ -1,0 +1,16 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "km-plugins",
+  "description": "KM Plugins - released Claude Code plugins",
+  "owner": {
+    "name": "Krzysztof Maziarz"
+  },
+  "plugins": [
+    {
+      "name": "session-cost-installer",
+      "description": "A skill that installs or updates the session-cost mod from the kKEo/claude-code-plugins-incubator marketplace, adding the marketplace first when it is missing",
+      "source": "./plugins/session-cost-installer",
+      "category": "Development"
+    }
+  ]
+}
