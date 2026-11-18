@@ -2,6 +2,7 @@
 name: install-session-cost
 description: "This skill should be used to install or update the session-cost mod (the pane that lists every model request with its tokens and cost) from the kKEo/claude-code-plugins-incubator marketplace. Triggers when the user asks to: install session-cost, set up the session cost pane, add the cost plugin from the incubator, get the newest session-cost, or update session-cost to the incubator version."
 argument-hint: "[user|project|local; defaults to user]"
+disable-model-invocation: true
 ---
 
 Install the `session-cost` plugin from the incubator marketplace, or update it when it is already installed. Run only the commands on this page; the skill changes nothing else. The skill pre-approves no command: Claude Code asks the user before each one that their settings do not already allow, and that is expected. If the user declines one, say which step was skipped and stop.

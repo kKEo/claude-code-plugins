@@ -2,6 +2,7 @@
 name: install-plan-progress
 description: "This skill should be used to install or update the plan-progress mod (the pane that shows the current plan and how far its realisation has advanced) from the kKEo/claude-code-plugins-incubator marketplace. Triggers when the user asks to: install plan-progress, set up the plan progress pane, add the plan pane from the incubator, get the newest plan-progress, or update plan-progress to the incubator version."
 argument-hint: "[user|project|local; defaults to user]"
+disable-model-invocation: true
 ---
 
 Install the `plan-progress` plugin from the incubator marketplace, or update it when it is already installed. Run only the commands on this page; the skill changes nothing else. The skill pre-approves no command: Claude Code asks the user before each one that their settings do not already allow, and that is expected. If the user declines one, say which step was skipped and stop.
