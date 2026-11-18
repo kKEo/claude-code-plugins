@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kKEo's Claude Code plugins</title>
+<meta name="description" content="Documentation for the km-plugins marketplace of Claude Code plugins: one book per plugin, covering the installer and the mod it installs.">
+<style>
+  :root { --bg: #fbfaf7; --fg: #1d1d1b; --muted: #5f5e58; --card: #ffffff; --line: #e4e1d8; --accent: #2f5d8a; --code: #f1efe8; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #16171a; --fg: #ecebe6; --muted: #a3a29b; --card: #1f2024; --line: #33343a; --accent: #8ab4e0; --code: #26272c; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 920px; margin: 0 auto; padding: 56px 16px 40px; }
+  h1 { font-size: 2rem; margin: 0 0 8px; letter-spacing: -0.01em; }
+  .lede { color: var(--muted); margin: 0 0 28px; }
+  .section { font-size: 1.4rem; margin: 44px 0 6px; letter-spacing: -0.01em; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
+  .card:hover { border-color: var(--accent); }
+  .tag { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); margin-bottom: 6px; }
+  .card h3 { margin: 0 0 8px; font-size: 1.25rem; }
+  .card h3 a { color: inherit; text-decoration: none; }
+  .card h3 a:hover { color: var(--accent); }
+  .card p { margin: 0 0 12px; color: var(--muted); }
+  .card ul { margin: 0 0 14px; padding-left: 18px; font-size: 0.95rem; }
+  .card li a, .more, footer a { color: var(--accent); }
+  .more { font-weight: 600; text-decoration: none; }
+  .more:hover { text-decoration: underline; }
+  pre { margin: 0; background: var(--code); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; overflow-x: auto; font: 14px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  .scroll { overflow-x: auto; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; }
+  code { background: var(--code); border-radius: 4px; padding: 1px 5px; font-size: 0.9em; }
+  footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>kKEo's Claude Code plugins</h1>
+  <p class="lede">The <code>km-plugins</code> marketplace holds two installer plugins. Each one sets up a mod from the incubator marketplace: a pane that sits beside the chat in Claude Code. Every plugin has a book of its own that covers both the installer and the mod.</p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="tag">Plugin and mod</div>
+      <h3><a href="session-cost-installer/">session-cost-installer</a></h3>
+      <p>Installs <strong>session-cost</strong>: a pane listing every model request of the session with its tokens and cost, with totals by model and by day.</p>
+      <ul>
+        <li><a href="session-cost-installer/installer/overview.html">What the installer does</a></li>
+        <li><a href="session-cost-installer/installer/get-started.html">Install and run it</a></li>
+        <li><a href="session-cost-installer/mod/overview.html">What the mod does</a></li>
+        <li><a href="session-cost-installer/mod/cost.html">How cost is counted</a></li>
+        <li><a href="session-cost-installer/mod/data-privacy.html">Data and privacy</a></li>
+      </ul>
+      <a class="more" href="session-cost-installer/">Read the book →</a>
+    </div>
+
+    <div class="card">
+      <div class="tag">Plugin and mod</div>
+      <h3><a href="plan-progress-installer/">plan-progress-installer</a></h3>
+      <p>Installs <strong>plan-progress</strong>: a pane showing the current plan and how far Claude has got with it, step by step.</p>
+      <ul>
+        <li><a href="plan-progress-installer/installer/overview.html">What the installer does</a></li>
+        <li><a href="plan-progress-installer/installer/get-started.html">Install and run it</a></li>
+        <li><a href="plan-progress-installer/mod/overview.html">What the mod does</a></li>
+        <li><a href="plan-progress-installer/mod/progress.html">Where progress comes from</a></li>
+        <li><a href="plan-progress-installer/mod/data-privacy.html">Data and privacy</a></li>
+      </ul>
+      <a class="more" href="plan-progress-installer/">Read the book →</a>
+    </div>
+  </div>
+
+  <h2 class="section">Quick start</h2>
+  <p class="lede">At the prompt of a Claude Code session. The sentences in the middle are requests to Claude; they start the installer skills.</p>
+<pre>/plugin marketplace add kKEo/claude-code-plugins
+/plugin install session-cost-installer@km-plugins
+/plugin install plan-progress-installer@km-plugins
+/reload-plugins
+
+install session-cost
+install plan-progress
+
+/reload-plugins
+/session-cost
+/plan-progress</pre>
+
+  <h2 class="section">Installer and mod</h2>
+  <p class="lede">The installer and what it installs come from two marketplaces.</p>
+  <div class="scroll">
+  <table>
+    <tr><th></th><th>Installer</th><th>Mod</th></tr>
+    <tr><td>What it is</td><td>A plugin with one skill that Claude follows</td><td>A TypeScript module that draws a pane into Claude Code</td></tr>
+    <tr><td>Marketplace</td><td><code>km-plugins</code></td><td><code>km-plugin-registry</code></td></tr>
+    <tr><td>Repository</td><td>kKEo/claude-code-plugins</td><td>kKEo/claude-code-plugins-incubator</td></tr>
+    <tr><td>Changes</td><td>When a version is released</td><td>With every commit; it is the newest work</td></tr>
+  </table>
+  </div>
+
+  <footer>
+    Source: <a href="https://github.com/kKEo/claude-code-plugins">github.com/kKEo/claude-code-plugins</a> ·
+    Mods: <a href="https://github.com/kKEo/claude-code-plugins-incubator">github.com/kKEo/claude-code-plugins-incubator</a> ·
+    MIT licence; each plugin carries its own LICENSE file.
+  </footer>
+</main>
+</body>
+</html>

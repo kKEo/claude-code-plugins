@@ -2,6 +2,8 @@
 
 One skill that installs the [session-cost](https://github.com/kKEo/claude-code-plugins-incubator/tree/master/plugins/session-cost) mod from the incubator marketplace `km-plugin-registry` (`kKEo/claude-code-plugins-incubator`), or updates it when it is already installed. It adds the marketplace first when it is missing.
 
+The full description, of the installer and of the mod, is the book [session-cost-installer and the session-cost mod](https://kkeo.github.io/claude-code-plugins/session-cost-installer/) ([source](../../docs/session-cost-installer/README.md)).
+
 ## Usage
 
 Ask in plain words ("install session-cost"), or use the command:
@@ -23,7 +25,7 @@ When it is done, type `/reload-plugins` and then `/session-cost`. A skill cannot
 
 ## What it runs
 
-Only these commands, which are also the only ones its `allowed-tools` let through without a prompt:
+Only these commands. The skill pre-approves none of them, so Claude Code asks you before each one that your permission settings do not already allow:
 
 ```
 claude plugin marketplace list --json

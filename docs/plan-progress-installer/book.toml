@@ -1,0 +1,16 @@
+[book]
+title = "plan-progress-installer and the plan-progress mod"
+description = "What the plan-progress-installer plugin does, and what the plan-progress mod it installs does."
+authors = ["Krzysztof Maziarz"]
+language = "en"
+src = "."
+
+[build]
+build-dir = "../../site/plan-progress-installer"
+create-missing = false
+
+[output.html]
+site-url = "/claude-code-plugins/plan-progress-installer/"
+git-repository-url = "https://github.com/kKEo/claude-code-plugins"
+
+additional-js = ["home-button.js"]

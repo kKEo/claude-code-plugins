@@ -2,10 +2,9 @@
 name: install-session-cost
 description: "This skill should be used to install or update the session-cost mod (the pane that lists every model request with its tokens and cost) from the kKEo/claude-code-plugins-incubator marketplace. Triggers when the user asks to: install session-cost, set up the session cost pane, add the cost plugin from the incubator, get the newest session-cost, or update session-cost to the incubator version."
 argument-hint: "[user|project|local; defaults to user]"
-allowed-tools: ["Bash(claude plugin marketplace list:*)", "Bash(claude plugin marketplace add kKEo/claude-code-plugins-incubator:*)", "Bash(claude plugin marketplace update km-plugin-registry:*)", "Bash(claude plugin list:*)", "Bash(claude plugin install session-cost@km-plugin-registry:*)", "Bash(claude plugin update session-cost@km-plugin-registry:*)"]
 ---
 
-Install the `session-cost` plugin from the incubator marketplace, or update it when it is already installed. Run only the commands on this page; the skill changes nothing else.
+Install the `session-cost` plugin from the incubator marketplace, or update it when it is already installed. Run only the commands on this page; the skill changes nothing else. The skill pre-approves no command: Claude Code asks the user before each one that their settings do not already allow, and that is expected. If the user declines one, say which step was skipped and stop.
 
 | Fact | Value |
 |---|---|
@@ -38,7 +37,7 @@ The argument is the installation scope: `user` (the default, every project of th
 5. **Report**, in a few lines:
    - what happened: installed or updated, the version, the scope, and whether the marketplace was added;
    - what the user does next, since a skill cannot type slash commands: `/reload-plugins` to load the mod into this session, then `/session-cost` to open the pane;
-   - that the options (status line, chip above the prompt, History days, cache TTL split, Stats tab) are under `/plugin` → session-cost → Configure.
+   - that the options (status line, chip above the prompt, History days, cache TTL split, Stats tab) are in `/config`, under the plugin.
 
 ## When a command fails
 

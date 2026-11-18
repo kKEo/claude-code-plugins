@@ -2,10 +2,9 @@
 name: install-plan-progress
 description: "This skill should be used to install or update the plan-progress mod (the pane that shows the current plan and how far its realisation has advanced) from the kKEo/claude-code-plugins-incubator marketplace. Triggers when the user asks to: install plan-progress, set up the plan progress pane, add the plan pane from the incubator, get the newest plan-progress, or update plan-progress to the incubator version."
 argument-hint: "[user|project|local; defaults to user]"
-allowed-tools: ["Bash(claude plugin marketplace list:*)", "Bash(claude plugin marketplace add kKEo/claude-code-plugins-incubator:*)", "Bash(claude plugin marketplace update km-plugin-registry:*)", "Bash(claude plugin list:*)", "Bash(claude plugin install plan-progress@km-plugin-registry:*)", "Bash(claude plugin update plan-progress@km-plugin-registry:*)"]
 ---
 
-Install the `plan-progress` plugin from the incubator marketplace, or update it when it is already installed. Run only the commands on this page; the skill changes nothing else.
+Install the `plan-progress` plugin from the incubator marketplace, or update it when it is already installed. Run only the commands on this page; the skill changes nothing else. The skill pre-approves no command: Claude Code asks the user before each one that their settings do not already allow, and that is expected. If the user declines one, say which step was skipped and stop.
 
 | Fact | Value |
 |---|---|
@@ -38,7 +37,7 @@ The argument is the installation scope: `user` (the default, every project of th
 5. **Report**, in a few lines:
    - what happened: installed or updated, the version, the scope, and whether the marketplace was added;
    - what the user does next, since a skill cannot type slash commands: `/reload-plugins` to load the mod into this session, then `/plan-progress` to open the pane;
-   - that the two options (open the pane at start, plan status line) are under `/plugin` → plan-progress → Configure.
+   - that the two options (open the pane at start, plan status line) are in `/config`, under the plugin.
 
 ## When a command fails
 

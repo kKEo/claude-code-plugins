@@ -1,0 +1,16 @@
+[book]
+title = "session-cost-installer and the session-cost mod"
+description = "What the session-cost-installer plugin does, and what the session-cost mod it installs does."
+authors = ["Krzysztof Maziarz"]
+language = "en"
+src = "."
+
+[build]
+build-dir = "../../site/session-cost-installer"
+create-missing = false
+
+[output.html]
+site-url = "/claude-code-plugins/session-cost-installer/"
+git-repository-url = "https://github.com/kKEo/claude-code-plugins"
+
+additional-js = ["home-button.js"]

@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+# Documentation gate: every plugin in the marketplace has a book under
+# docs/<plugin>/, every book is reachable from the landing page, and every
+# relative link and image in the books resolves.
+# Exit 1 on any failure. Run from anywhere; paths are resolved from this script.
+set -uo pipefail
+
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
+
+python3 - <<'PY'
+import json, os, re, sys
+
+fail = 0
+def err(msg):
+    global fail
+    print("error:", msg)
+    fail = 1
+
+landing = open("docs/index.html", encoding="utf-8").read()
+plugins = [p["name"] for p in json.load(open(".claude-plugin/marketplace.json"))["plugins"]]
+books = sorted(d for d in os.listdir("docs") if os.path.isfile(f"docs/{d}/book.toml"))
+
+for name in plugins:
+    if name not in books:
+        err(f"plugin '{name}' has no book at docs/{name}/")
+for book in books:
+    if book not in plugins:
+        err(f"docs/{book}/ documents no plugin of the marketplace")
+    if f'href="{book}/"' not in landing:
+        err(f"the landing page has no link to {book}/")
+    for f in ("README.md", "SUMMARY.md", ".gitbook.yaml"):
+        if not os.path.isfile(f"docs/{book}/{f}"):
+            err(f"docs/{book}/{f} is missing")
+
+# Links of the landing page into the books: foo/bar.html must have a foo/bar.md.
+for href in re.findall(r'href="([^"#:]+\.html)"', landing):
+    if not os.path.isfile("docs/" + href[:-5] + ".md"):
+        err(f"landing page link {href} has no page behind it")
+
+link = re.compile(r'!?\[[^\]]*\]\(([^)\s]+)\)')
+heading = re.compile(r'^#{1,6}\s+(.*)$', re.M)
+def anchors(path):
+    text = re.sub(r'```.*?```', '', open(path, encoding="utf-8").read(), flags=re.S)
+    out = set()
+    for h in heading.findall(text):
+        a = re.sub(r'[^\w\- ]', '', h.strip().lower()).replace(' ', '-')
+        out.add(a)
+    return out
+
+for book in books:
+    base = f"docs/{book}"
+    summary = open(f"{base}/SUMMARY.md", encoding="utf-8").read()
+    listed = {os.path.normpath(t.split('#')[0]) for t in link.findall(summary)}
+    pages = []
+    for d, _, files in os.walk(base):
+        for f in files:
+            if f.endswith(".md"):
+                pages.append(os.path.join(d, f))
+    for page in sorted(pages):
+        rel = os.path.relpath(page, base)
+        if rel != "SUMMARY.md" and rel not in listed:
+            err(f"{page} is not in SUMMARY.md, so it is not published")
+        text = re.sub(r'```.*?```', '', open(page, encoding="utf-8").read(), flags=re.S)
+        text = re.sub(r'`[^`\n]*`', '', text)
+        for target in link.findall(text):
+            if re.match(r'[a-z]+:', target):
+                continue
+            path, _, frag = target.partition('#')
+            dest = os.path.normpath(os.path.join(os.path.dirname(page), path)) if path else page
+            if not os.path.isfile(dest):
+                err(f"{page}: link to {target} does not resolve")
+            elif frag and dest.endswith(".md") and frag not in anchors(dest):
+                err(f"{page}: no heading '#{frag}' in {dest}")
+    for t in listed:
+        if not os.path.isfile(os.path.join(base, t)):
+            err(f"{base}/SUMMARY.md lists {t}, which does not exist")
+
+if fail:
+    print("docs-check: FAIL")
+    sys.exit(1)
+print(f"docs-check: OK ({len(books)} books)")
+PY
